@@ -1,0 +1,126 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>custom-node-html</title>
+
+    <link rel="stylesheet" href="../../Treant.css">
+    <link rel="stylesheet" href="custom-node-html.css">
+
+    <script src="../../vendor/raphael.js"></script>
+    <script src="../../Treant.js"></script>
+
+</head>
+
+<body>
+    <div id="plOrgChart">
+
+    </div>
+
+    <script>
+        var data = {
+            dept: 'D',
+            fullName: 'first name',
+            children: [
+                {
+                    dept: 'D1', fullName: 'first name', children: [
+                        { dept: 'D2', fullName: 'first name' },
+                        { dept: 'D2', fullName: 'first name' }
+                    ]
+                },
+                {
+                    dept: 'D2', fullName: 'first name', children: [
+                        { dept: 'D21', fullName: 'first name' },
+                        { dept: 'D22', fullName: 'first name' },
+                        { dept: 'D23', fullName: 'first name' }
+                    ]
+                },
+                {
+                    dept: 'D3', fullName: 'first name', children: [
+                        { dept: 'D31', fullName: 'first name' },
+                        { dept: 'D32', fullName: 'first name' },
+                        { dept: 'D33', fullName: 'first name' }
+                    ]
+                },
+                {
+                    dept: 'D1', fullName: 'first name', children: [
+                        { dept: 'D2', fullName: 'first name' },
+                        { dept: 'D2', fullName: 'first name' },
+                        { dept: 'D2', fullName: 'first name' }
+                    ]
+                },
+                {
+                    dept: 'D1', fullName: 'first name', children: [
+                        { dept: 'D2', fullName: 'first name' }
+                    ]
+                },
+                {
+                    dept: 'D1', fullName: 'first name', children: [
+                        { dept: 'D2', fullName: 'first name' }
+                    ]
+                }
+            ]
+        }
+
+        new Treant({
+            chart: {
+                container: '#plOrgChart',
+                connectors: {
+                    type: 'step',
+                    style: {
+                        stroke: '#65a0d5'
+                    },
+                    stackIndent: 5
+                },
+                siblingSeparation: 10,
+                levelSeparation: 15,
+                subTeeSeparation: 40,
+                callback: {
+                    onClickNode: function(node, tree){
+                        alert('click:'+node.nodeStructure.dept+'\r\nsee detail in console');
+                        console.log(node, tree);
+                        //node.parent();//get parent
+                    },
+                    onBeforeCreateNode: function (node) {
+                        if (node.children && node.children.length >= 3) {
+                            node.stackChildren = true;
+                        }
+                    },
+                    buildNodeFromText: function (node) {
+                        // var html =  $('<div class="node-main"><p class="CEO">'+node.dept+'</p><p class="content">'+node.fullName+'</p><div>');
+
+                        var html = document.createElement('div');
+                        html.className = 'node-main';
+
+
+                        if (this.id == 2) {
+                            // html.addClass('current');
+                            html.className += ' current'
+                        }
+
+                        var title = node.dept;
+                        
+                        var p = document.createElement('p');
+                        p.className='ceo';
+                        p.appendChild(document.createTextNode(title));
+                        html.appendChild(p);
+
+                        p = document.createElement('p');
+                        p.className='content';
+                        p.appendChild(document.createTextNode(node.fullName));
+                        html.appendChild(p);
+
+                        return html;
+                    }
+                }
+            },
+            nodeStructure: data
+        }, function (tree) {
+            //loaded tree.drawArea
+        });
+    </script>
+</body>
+
+</html>

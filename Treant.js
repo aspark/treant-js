@@ -463,7 +463,7 @@
 	
 				this.CONFIG.callback.onBeforeAddNode.apply( this, [parentTreeNode, nodeDefinition] );
 	
-				var oNewNode = this.nodeDB.createNode( nodeDefinition, parentTreeNode.id, this );
+				var oNewNode = this.nodeDB.createNode( nodeDefinition, parentTreeNode.id, this, null, this.parent().level+1 );
 				oNewNode.createGeometry( this );
 	
 				oNewNode.parent().createSwitchGeometry( this );
@@ -1942,10 +1942,15 @@
 	
 			var drawArea = tree.drawArea,
 				image,
+				self = this,
 	
 				/////////// CREATE NODE //////////////
 				node = document.createElement( this.link.href? 'a': 'div' );
-	
+
+			UTIL.addEvent(node, 'click', function(){
+				tree.CONFIG.callback.onClickNode.apply(node, [self, tree]);
+			})
+
 			node.className = ( !this.pseudo )? TreeNode.CONFIG.nodeHTMLclass: 'pseudo';
 			if ( this.nodeHTMLclass && !this.pseudo ) {
 				node.className += ' ' + this.nodeHTMLclass;
@@ -2071,6 +2076,7 @@
 			},
 	
 			callback: {
+				onClickNode:function(treeNode, tree){},//this = node html
 				buildNodeFromText:function(nodeStructure, container){}, //this = treeNode
 				onBeforeCreateNode:function(nodeStructure){},//this = Tree
 				onCreateNode: function( treeNode, treeNodeDom ) {}, // this = Tree

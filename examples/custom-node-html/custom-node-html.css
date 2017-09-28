@@ -1,0 +1,12 @@
+*{ margin: 0}
+
+#plOrgChart .node { text-align: center; border-radius: 3px; background-color: #BDBDBD; padding: 3px 12px; }
+
+#plOrgChart .node-main.current { font-weight: bold; color: #fff; }
+
+#plOrgChart .node-1 { background-color: #CC6403; }
+
+
+#plOrgChart .node .title { border: none; }
+
+#plOrgChart .node .content { min-width: 100px; }
