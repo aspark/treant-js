@@ -2,7 +2,7 @@
 
 #plOrgChart .node { text-align: center; border-radius: 3px; background-color: #BDBDBD; padding: 3px 12px; }
 
-#plOrgChart .node-main.current { font-weight: bold; color: #fff; }
+#plOrgChart .node.current { font-weight: bold; color: #fff; background-color:orange; }
 
 #plOrgChart .node-1 { background-color: #CC6403; }
 

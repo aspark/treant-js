@@ -35,7 +35,14 @@
                         { dept: 'D21', fullName: 'first name' },
                         { dept: 'D22', fullName: 'first name' },
                         { dept: 'D23', fullName: 'first name' }
-                    ]
+                    ],
+                    connectors: {
+                        type: 'bCurve',
+                        style: {
+                            stroke: 'red',
+                            'stroke-width': 3
+                        }
+                    }
                 },
                 {
                     dept: 'D3', fullName: 'first name', children: [
@@ -78,8 +85,8 @@
                 levelSeparation: 15,
                 subTeeSeparation: 40,
                 callback: {
-                    onClickNode: function(node, tree){
-                        alert('click:'+node.nodeStructure.dept+'\r\nsee detail in console');
+                    onClickNode: function (node, tree) {
+                        alert('click:' + node.nodeStructure.dept + '\r\nsee detail in console');
                         console.log(node, tree);
                         //node.parent();//get parent
                     },
@@ -87,28 +94,28 @@
                         if (node.children && node.children.length >= 3) {
                             node.stackChildren = true;
                         }
-                    },
-                    buildNodeFromText: function (node) {
-                        // var html =  $('<div class="node-main"><p class="CEO">'+node.dept+'</p><p class="content">'+node.fullName+'</p><div>');
 
+                        //change line node.connectors={}
+                    },
+                    buildNodeFromText: function (node, container) {
                         var html = document.createElement('div');
                         html.className = 'node-main';
 
 
                         if (this.id == 2) {
-                            // html.addClass('current');
-                            html.className += ' current'
+                            // html.className += ' current';
+                            container.className += ' current';
                         }
 
                         var title = node.dept;
-                        
+
                         var p = document.createElement('p');
-                        p.className='ceo';
+                        p.className = 'ceo';
                         p.appendChild(document.createTextNode(title));
                         html.appendChild(p);
 
                         p = document.createElement('p');
-                        p.className='content';
+                        p.className = 'content';
                         p.appendChild(document.createTextNode(node.fullName));
                         html.appendChild(p);
 
