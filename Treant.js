@@ -2206,6 +2206,9 @@
 	
 		/* expose constructor globally */
 		window.Treant = Treant;
+		if(module){
+			module.exports = Treant;
+		}
 	
 	})();
 	

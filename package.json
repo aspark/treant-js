@@ -7,7 +7,8 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./**/*.test.js",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,18 @@
   "bugs": {
     "url": "https://github.com/fperucic/treant-js/issues"
   },
-  "homepage": "https://github.com/fperucic/treant-js#readme"
+  "homepage": "https://github.com/fperucic/treant-js#readme",
+  "devDependencies": {
+    "canvas-prebuilt": "^1.6.5-prerelease.1",
+    "chai": "^4.1.2",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^4.3.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "jquery": "^3.2.1",
+    "jsdom": "^11.2.0",
+    "mocha": "^3.5.3",
+    "svgdom": "0.0.15"
+  }
 }
